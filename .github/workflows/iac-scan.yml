@@ -1,0 +1,50 @@
+name: IaC Security Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  scan-insecure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Checkov on insecure config
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: terraform/insecure
+          quiet: false
+          soft_fail: true
+
+      - name: Run Trivy on insecure config
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: config
+          scan-ref: terraform/insecure
+          exit-code: 0
+          severity: CRITICAL,HIGH,MEDIUM,LOW
+
+  scan-secure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Checkov on secure config
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: terraform/secure
+          quiet: false
+          soft_fail: true
+
+      - name: Run Trivy on secure config
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: config
+          scan-ref: terraform/secure
+          exit-code: 0
+          severity: CRITICAL,HIGH,MEDIUM,LOW
