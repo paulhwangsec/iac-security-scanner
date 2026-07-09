@@ -1,5 +1,11 @@
 # IaC Security Scanner
 
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
+![Terraform](https://img.shields.io/badge/Terraform-IaC-844FBA)
+![Checkov](https://img.shields.io/badge/Checkov-Scanner-blue)
+![Trivy](https://img.shields.io/badge/Trivy-Scanner-1904DA)
+![CI/CD](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF)
+
 A hands-on demonstration of shift-left security: catching AWS misconfigurations in Terraform code *before* deployment, using automated scanning tools wired into a CI/CD pipeline.
 
 ## Overview
